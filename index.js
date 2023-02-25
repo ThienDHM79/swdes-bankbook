@@ -13,12 +13,16 @@ app.use( express.static(__dirname + '/public'));
 app.engine('hbs', expressHandlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
     extname: 'hbs',
-    defaultLayout: 'layout'
+    defaultLayout: 'layout',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true
+    }
 }));
 app.set('view engine', 'hbs');
 
 //routes
 app.use('/', require('./routes/indexRouter'));
+app.use('/reportbook', require('./routes/Bankbook.router'));
 //create Table in DB
 app.get('/createTables', (req,res)=> {
     let models = require('./models');
