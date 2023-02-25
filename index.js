@@ -19,7 +19,13 @@ app.set('view engine', 'hbs');
 
 //routes
 app.use('/', require('./routes/indexRouter'));
-
+//create Table in DB
+app.get('/createTables', (req,res)=> {
+    let models = require('./models');
+    models.sequelize.sync().then(() => {
+        res.send('table created!');
+    } )
+})
 //wrong route
 
 
