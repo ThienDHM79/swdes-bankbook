@@ -1,5 +1,5 @@
 'use strict';
-const BankbookService = require("../services/Bankbook.Service");
+//const BankbookService = require("../services/Bankbook.Service");
 
 // module.exports = class Bankbook{
 //     static async getAllBooks(req, res){
@@ -16,15 +16,16 @@ const BankbookService = require("../services/Bankbook.Service");
 //         res.render('reportbook');
 //     }
 // }
-let controller = {};
-const models = require('../models');
+const controller = {};
+const models = require('../models')
 
 
 controller.getAllBooks = async(req, res) => {
-    const Bankbook = models.Bankbook
+    const Bankbook = models.Bankbook;
     const bankbooks = await Bankbook.findAll();
     console.log(bankbooks);
-    res.render('reportbook', {bankbooks});
+    res.locals.bankbooks = bankbooks;
+    res.render('reportbook', { bankbooks});
 }
 
 module.exports = controller;

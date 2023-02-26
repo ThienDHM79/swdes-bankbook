@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const BankbookCtrl = require("../controllers/Bankbook.controller");
+const BankbookCtrl = require("../controllers/BankbookController");
 
 router.get("/", BankbookCtrl.getAllBooks);
 
