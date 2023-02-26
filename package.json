@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "thiendao",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^6.0.7",
-    "pg": "^8.9.0",
+    "express-handlebars": "^6.0.6",
+    "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.29.0"
+    "sequelize": "^6.28.0"
   }
 }

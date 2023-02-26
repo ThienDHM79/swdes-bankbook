@@ -2,8 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const BankbookCtrl = require("../controllers/BankbookController");
+const controller = require("../controllers/BankbookController");
 
-router.get("/", BankbookCtrl.getAllBooks);
+router.get("/", controller.getAllBooks);
 
 module.exports = router;
