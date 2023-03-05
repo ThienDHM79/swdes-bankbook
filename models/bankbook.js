@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Bankbook.belongsTo( models.Customer, {foreignKey: 'customerId'});
+      Bankbook.belongsTo( models.SaveConfig, {foreignKey: 'savetypeId'});
     }
   }
   Bankbook.init({

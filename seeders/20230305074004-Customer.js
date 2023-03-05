@@ -13,25 +13,25 @@ module.exports = {
      * }], {});
     */
    let data = [{
-    "name": "Wilton Castro",
+    "name": "Wilton Castro1",
     "address": "177 Sugar Parkway",
-    "cmnd": 277592074
+    "cmnd": 111111111
   }, {
-    "name": "Mickey Crossfield",
+    "name": "Mickey Crossfield2",
     "address": "565 Sachs Terrace",
-    "cmnd": 482656151
+    "cmnd": 222222222
   }, {
-    "name": "Nollie Loxton",
+    "name": "Nollie Loxton3",
     "address": "38018 Arizona Point",
-    "cmnd": 424770448
+    "cmnd": 333333333
   }, {
-    "name": "Archibold Cammell",
+    "name": "Archibold Cammell4",
     "address": "336 Forest Junction",
-    "cmnd": 281416007
+    "cmnd": 444444444
   }, {
-    "name": "Aldus Senechault",
+    "name": "Aldus Senechault5",
     "address": "16204 Bellgrove Place",
-    "cmnd": 488563942
+    "cmnd": 555555555
   }];
    data.forEach(item => {
      item.createdAt = Sequelize.literal('NOW()');

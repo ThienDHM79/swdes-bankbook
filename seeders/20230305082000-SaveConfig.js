@@ -12,7 +12,32 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    data = [];
+   // time period : day, minTimewithdraw: day
+    let data = [{
+      "savetype": "demand",
+      "timeperiod": 30,
+      "rate": 0.0015,
+      "minTimeWdraw": 15,
+      "minInput": 100000,
+      "allowAdd": true
+    },
+    {
+      "savetype": "3-month",
+      "timeperiod": 90,
+      "rate": 0.005,
+      "minTimeWdraw": 90,
+      "minInput": 100000,
+      "allowAdd": false
+    },
+    {
+      "savetype": "6-month",
+      "timeperiod": 180,
+      "rate": 0.0055,
+      "minTimeWdraw": 180,
+      "minInput": 100000,
+      "allowAdd": false
+    }
+    ];
     data.forEach(item => {
       item.createdAt = Sequelize.literal('NOW()');
       item.updatedAt = Sequelize.literal('NOW()');

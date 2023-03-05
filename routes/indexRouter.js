@@ -8,3 +8,10 @@ router.get('/', controller.showHomepage);
 router.get('/:page', controller.showPage);
 
 module.exports = router;
+
+router.get('/createTables', (req, res) =>{
+    let models = require('../models');
+    models.sequelize.sync().then( () => {
+        res.send('tables created');
+    })
+});
