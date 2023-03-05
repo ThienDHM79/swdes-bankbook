@@ -12,25 +12,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let data = [{
-      "name": "bd-101",
-      "savetype":"demand",
-      "amount": 1000000,
-      "status": true
-    },
-    {
-      "name": "b3-102",
-      "savetype":"3-month",
-      "amount": 4000000,
-      "status": false
-    }
-    ];
+    data = [];
     data.forEach(item => {
-      item.openDate = Sequelize.literal('NOW()');
+      item.createdAt = Sequelize.literal('NOW()');
       item.updatedAt = Sequelize.literal('NOW()');
     })
-    await queryInterface.bulkInsert('Bankbooks', data, {});
-
+    await queryInterface.bulkInsert('SaveConfigs', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -40,6 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Bankbooks', null, {});
+     await queryInterface.bulkDelete('SaveConfigs', null, {});
   }
 };
