@@ -23,7 +23,8 @@ app.set('view engine', 'hbs');
 
 //routes
 app.use('/', require('./routes/indexRouter'));
-app.use('/reportbook', require('./routes/BankbookRouter'));
+app.use('/bankbook', require('./routes/BankbookRouter'));
+
 //create Table in DB
 app.get('/createTables', (req,res)=> {
     let models = require('./models');
