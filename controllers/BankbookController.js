@@ -9,7 +9,6 @@ module.exports = class Bankbook{
             if(!bankbooks){
                 res.status(404).json("no articles");
             }
-            console.log(bankbooks);
             res.locals.bankbooks = bankbooks;
             res.render('reportbook');
         } catch (error){
