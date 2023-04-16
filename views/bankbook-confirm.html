@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Mở sổ tiết kiệm</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/css/style.css">
+    </head>
+  <body>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row b-2">
+                    <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">Ma so tiet kiem</label>
+                    <div class="col-sm-10 col-md-6">
+                      <input type="text" class="form-control m-1" id="tenp-account" value="1234567" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row ">
+                    <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">So tien giao dich</label>
+                    <div class="col-sm-10 col-md-6">
+                      <input type="number" class="form-control m-1" id="tenp-account" value="1234567" >
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="dropdown p-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                            Loai tiet kiem
+                        </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <p class="dropdown-item" href="#">khong ky han</p>
+                    <p class="dropdown-item" href="#">3 thang</p>
+                    <p class="dropdown-item" href="#">6 thang</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <button type="button" name="" id="" class="btn btn-primary btn-block">Tao phieu yeu cau</button>
+        </div>
+    </section>
+    <section class="container p-3">
+        <div class="container bg-secondary-2" id="request-confirm">
+            <h5 class="text-center text-white">So tiet kiem</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="bankbookid" class="col-sm-2 col-md-6 col-form-label text-dark">Ma so</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="text" readonly class="form-control" id="bankbokid" value="12">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="booktype" class="col-sm-4 col-md-6 col-form-label text-dark">Loai tiet kiem</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="text" readonly class="form-control " id="booktype" value="3 thang">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="customername" class="col-sm-2 col-md-6 col-form-label text-dark">Khach hang</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="text" readonly class="form-control" id="customername" value="Le Van A">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="cmnd" class="col-sm-2 col-md-6 col-form-label text-dark">CMND</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="text" readonly class="form-control" id="cmnd" value="1234567">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-2 col-md-3 col-form-label text-dark">Dia chi</label>
+                            <div class="col-sm-10 col-md-9">
+                              <input type="text" readonly class="form-control" id="address" value="1234567">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="opendate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay mo so</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="date" readonly class="form-control" id="opendate" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="amount" class="col-sm-2 col-md-6 col-form-label text-dark">So tien goi</label>
+                            <div class="col-sm-10 col-md-6">
+                              <input type="number" readonly class="form-control" id="amount" value="10 000 000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <p class="text-center">lai suat 0.55%. Den han ngay 20/10/2022. Du thu 11 000 000</p>
+        <div class="row m-2">
+            <button type="button" name="cancel" id="cancel" class="btn-warning btn-block col-md-3 col-sm-6">Cancel</button>
+            <div class="col-md-6"></div>
+            <button type="button" name="create" id="create-book" class="btn-primary btn-block col-md-3 col-sm-6">Confirm</button>
+        </div>
+    </section>
+    <div class="footer"></div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

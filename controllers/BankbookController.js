@@ -1,4 +1,5 @@
 'use strict';
+const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
 
@@ -7,7 +8,7 @@ module.exports = class Bankbook{
         try {
             let bankbooks = await BankbookService.getAllBooks();
             if(!bankbooks){
-                res.status(404).json("no articles");
+                res.status(404).json("no books");
             }
             res.locals.bankbooks = bankbooks;
             res.render('reportbook');
@@ -15,6 +16,9 @@ module.exports = class Bankbook{
             res.status(500).json( { error: error});
         }
         
+    }
+    static async show(req, res){
+        res.render('bankbook-confirm');
     }
 }
 // const controller = {};
