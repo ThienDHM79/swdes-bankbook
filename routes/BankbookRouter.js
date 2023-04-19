@@ -9,7 +9,8 @@ const CustomerCtrl = require("../controllers/CustomerController");
 
 router.get("/reportbook", controller.getAllBooks);
 //vao trang co in thong tin can validate khach hang moi/cu de route
-router.post("/request-create",
+
+router.post("/confirm",
 body('customerid').notEmpty().withMessage('CMND is required'),
 body('amount').notEmpty().withMessage('amount is required'), 
     //CustomerCtrl.Exist(body('customerid')), 
@@ -26,7 +27,7 @@ body('amount').notEmpty().withMessage('amount is required'),
         }
         next();
     },
-    controller.show
+    controller.showConfirm
 );
 
 

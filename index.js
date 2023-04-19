@@ -21,6 +21,10 @@ app.engine('hbs', expressHandlebars.engine({
 }));
 app.set('view engine', 'hbs');
 
+//cau hinh doc du lieu post tu body
+app.use(express.json());
+app.use(express.urlencoded( { extended: false }));
+
 //routes
 app.use('/', require('./routes/indexRouter'));
 app.use('/bankbook', require('./routes/BankbookRouter'));

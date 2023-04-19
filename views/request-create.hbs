@@ -1,20 +1,19 @@
     <!--header-->
     <!--/end header-->
+<div class="container">
     <h2 class="text-center">Request</h2>
     <!-- form to choose function : create book, deposit, withdraw-->
-    <div class="container">
-        <form method="post" >
+    <div class="container col-md-8">
+        <form action="/bankbook/confirm" method="post" >
 
             <div class="form-group">
-                <label for="customerid">CMND</label>
+                <label for="customerid">Nhap CMND/CCCD: </label>
                 <input type="text" class="form-control" name="customerid" id="customerid" aria-describedby="custhelp" placeholder="CMND">
-                <small id="custhelp" class="form-text text-muted">CMND hay CCCD</small>
             </div>
 
             <div class="form-group">
-                <label for="amount">Amount</label>
+                <label for="amount">nhap so VND can giao dich</label>
                 <input type="number" class="form-control" name="amount" id="amount" aria-describedby="" placeholder="Amount">
-                <small id="" class="form-text text-muted">nhap so VND can giao dich</small>
             </div>
             <div class="row">
                 <button class="btn btn-primary btn-block">Check</button>
@@ -22,3 +21,4 @@
         </form>
     </div>
     <!--/ end form-->
+</div>

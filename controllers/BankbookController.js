@@ -17,7 +17,8 @@ module.exports = class Bankbook{
         }
         
     }
-    static async show(req, res){
+    static async showConfirm(req, res){
+        
         res.render('bankbook-confirm');
     }
 }
