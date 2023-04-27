@@ -9,10 +9,13 @@ module.exports = class CustomerService{
                     cmnd: input_cmnd
                 }
             });
-            console.log(customercmnd.toJSON());
+            if(!customercmnd){
+                throw new Error(`khong tim thay khach`);
+            }
             return customercmnd;
         } catch (error){
-            console.log(`could not fetch ${error}`);
+            throw new Error(`Khong tim thay khach hang. ${error}`);
         }
     }
 }
+

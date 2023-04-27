@@ -7,6 +7,8 @@ const port = process.env.PORT || 8000;
 
 //handle-bar
 const expressHandlebars = require('express-handlebars');
+//session
+const session = require('express-session');
 //cau hinh public static folder
 app.use( express.static(__dirname + '/public'));
 //cau hinh su dung express-handlebars
@@ -24,6 +26,17 @@ app.set('view engine', 'hbs');
 //cau hinh doc du lieu post tu body
 app.use(express.json());
 app.use(express.urlencoded( { extended: false }));
+
+//cau hinh su dung session
+app.use( session({
+    secret: 'S3cret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        maxAge: 20 * 60 * 1000 //20ph
+    }
+}));
 
 //routes
 app.use('/', require('./routes/indexRouter'));

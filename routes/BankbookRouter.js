@@ -5,7 +5,8 @@ const {body, validationResult } = require("express-validator");
 const router = express.Router();
 const controller = require("../controllers/BankbookController");
 
-const CustomerCtrl = require("../controllers/CustomerController");
+const CustomerService = require("../services/CustomerService");
+const ConfigService = require("../services/ConfigService");
 
 router.get("/reportbook", controller.getAllBooks);
 //vao trang co in thong tin can validate khach hang moi/cu de route
@@ -13,8 +14,8 @@ router.get("/reportbook", controller.getAllBooks);
 router.post("/confirm",
 body('customerid').notEmpty().withMessage('CMND is required'),
 body('amount').notEmpty().withMessage('amount is required'), 
-    //CustomerCtrl.Exist(body('customerid')), 
-    //Config.MinIn(),
+body('customerid').custom(value => CustomerService.Exist(value)),
+body('amount').custom( value => ConfigService.checkMinInput(value)),
     (req, res, next) => {
         let errors = validationResult(req);
         if (!errors.isEmpty()){

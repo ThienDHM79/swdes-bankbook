@@ -2,6 +2,7 @@
 const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
+const CustomerService = require('../services/CustomerService');
 
 module.exports = class Bankbook{
     static async getAllBooks(req, res){
@@ -17,9 +18,20 @@ module.exports = class Bankbook{
         }
         
     }
-    static async showConfirm(req, res){
-        
-        res.render('bankbook-confirm');
+
+    static async showConfirm(req,res){
+        try{
+            let customer = await CustomerService.Exist(cmnd);
+            if (!customer){
+                res.status(404).json('no customer');
+            }
+            console.log(customer);
+            //res.render('bankbook-confirm');
+        }
+        catch(error){
+            res.status(500).json( { error : error});
+        }
+
     }
 }
 // const controller = {};
