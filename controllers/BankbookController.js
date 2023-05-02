@@ -2,6 +2,7 @@
 const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
+const { GetCustomerbyId } = require('../services/CustomerService');
 const CustomerService = require('../services/CustomerService');
 
 module.exports = class Bankbook{
@@ -18,18 +19,27 @@ module.exports = class Bankbook{
         }
         
     }
-
-    static async showConfirm(req,res){
+    static async GetCustomer(req,res){
         try{
-            let customer = await CustomerService.Exist(cmnd);
+            let customer = await CustomerService.GetCustomerbyCMND(req.body.customercmnd);
             if (!customer){
                 res.status(404).json('no customer');
             }
             console.log(customer);
-            //res.render('bankbook-confirm');
+
+            req.session.customerId = customer.id;
         }
         catch(error){
             res.status(500).json( { error : error});
+        }
+    }
+    static async showConfirm(req,res){
+        let customer = await CustomerService.GetCustomerbyCMND(req.body.customercmnd);
+        if (customer){
+            res.locals.customer = customer;
+            res.render('bankbook-confirm');
+        } else {
+            res.redirect('/request-create');
         }
 
     }

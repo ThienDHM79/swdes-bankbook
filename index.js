@@ -7,6 +7,8 @@ const port = process.env.PORT || 8000;
 
 //handle-bar
 const expressHandlebars = require('express-handlebars');
+//helper
+const {getDate} = require('./controllers/helper');
 //session
 const session = require('express-session');
 //cau hinh public static folder
@@ -37,6 +39,13 @@ app.use( session({
         maxAge: 20 * 60 * 1000 //20ph
     }
 }));
+
+// //khoi tao customer session
+// app.use( (req,res,next) => {
+//     let CustomerProcess = require('./controllers/customerProcess');
+//     req.session.customer = new CustomerProcess(1);
+//     next();
+// })
 
 //routes
 app.use('/', require('./routes/indexRouter'));
