@@ -23,7 +23,20 @@ module.exports = {
       "savetype":"3-month",
       "amount": 4000000,
       "status": false
+    },
+    {
+      "name": "b6-103",
+      "savetype":"6-month",
+      "amount": 10000000,
+      "status": true
+    },
+    {
+      "name": "bd-104",
+      "savetype":"demand",
+      "amount": 400000,
+      "status": false
     }
+    
     ];
     data.forEach(item => {
       item.openDate = Sequelize.literal('NOW()');

@@ -23,7 +23,7 @@ p{
     padding: 0;
     border: 0;
 }
-.container, label, .col-md-6 input, .col-md-9 input, .btn-warning, .btn-primary {
+.container, label, .col-md-6 input, .col-md-9 input, .btn-warning, .btn-primary, span {
     border-radius: 5px;
 }
 .bg-secondary-2{

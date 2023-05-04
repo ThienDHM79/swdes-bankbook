@@ -10,4 +10,13 @@ module.exports = class BankbookService{
             console.log(`could not fetch ${error}`);
         }
     }
+    static async generateBookNo(){
+        try{
+            let bookNo = await models.Bankbook.max('id') + 1;
+            console.log(bookNo);
+            return bookNo;
+        } catch (error){
+            console.log(`could not fetch ${error}`);
+        }
+    }
 }

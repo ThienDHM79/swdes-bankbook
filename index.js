@@ -40,12 +40,6 @@ app.use( session({
     }
 }));
 
-// //khoi tao customer session
-// app.use( (req,res,next) => {
-//     let CustomerProcess = require('./controllers/customerProcess');
-//     req.session.customer = new CustomerProcess(1);
-//     next();
-// })
 
 //routes
 app.use('/', require('./routes/indexRouter'));
