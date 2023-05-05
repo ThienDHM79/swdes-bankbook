@@ -8,7 +8,7 @@ const controller = require("../controllers/BankbookController");
 const CustomerService = require("../services/CustomerService");
 const ConfigService = require("../services/ConfigService");
 
-router.get("/reportbook", controller.getAllBooks);
+//router.get("/reportbook", controller.getAllBooks);
 //vao trang co in thong tin can validate khach hang moi/cu de route
 
 router.post("/confirm",

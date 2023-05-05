@@ -13,7 +13,7 @@ module.exports = class Bankbook{
                 res.status(404).json("no books");
             }
             res.locals.bankbooks = bankbooks;
-            res.render('reportbook');
+            res.render('report-book');
         } catch (error){
             res.status(500).json( { error: error});
         }

@@ -44,6 +44,7 @@ app.use( session({
 //routes
 app.use('/', require('./routes/indexRouter'));
 app.use('/bankbook', require('./routes/BankbookRouter'));
+app.use('/report', require('./routes/ReportRouter'));
 
 //create Table in DB
 app.get('/createTables', (req,res)=> {
