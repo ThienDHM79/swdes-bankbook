@@ -1,11 +1,10 @@
-
     <section class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class=" row m-2">
                     <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">Ma so tiet kiem</label>
                     <div class="col-sm-10 col-md-6">
-                      <input type="text" class="form-control m-1" id="temp-bankbookid" value="{{bookNo}}" disabled>
+                      <input type="text" class="form-control m-1" id="temp-bankbookid" value="{{bookNo}}" readonly>
                     </div>
                 </div>
             </div>
@@ -13,7 +12,7 @@
                 <div class=" row m-2 ">
                     <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">So tien giao dich</label>
                     <div class="col-sm-10 col-md-6">
-                      <input type="number" class="form-control m-1" id="tenp-amount" value="{{amount}}" >
+                      <input type="number" class="form-control m-1" id="temp-amount" value="{{amount}}" >
                 </div>
             </div>
             
@@ -24,7 +23,6 @@
                     <label class="input-group-text" for="inputGroupSelect01">Loai tiet kiem</label>
                 </div>
             <select class="custom-select" id="temp-booktype">
-                <option selected>Choose...</option>
                 <option value="demand">khong ky han</option>
                 <option value="3 thang">3 thang</option>
                 <option value="6 thang">6 thang</option>
@@ -32,7 +30,7 @@
             </div>
         </div>
         <div class="container">
-            <button onclick="createNotice()" class="btn btn-primary btn-block m-2">Tao phieu yeu cau</button>
+            <button onclick="createNotice()" class="btn btn-primary btn-block m-2" id="btn-create">Tao phieu yeu cau</button>
         </div>
     </section>
     <section class="container">
@@ -45,7 +43,7 @@
                         <div class=" row">
                             <label for="bankbookid" class="col-sm-4 col-md-6 col-form-label text-dark">Ma so</label>
                             <div class="col-sm-8 col-md-6">
-                              <span type="text" class="form-control" id="bankbokid" readonly></span>
+                              <span type="text" class="form-control" id="bankbookid"></span>
                             </div>
                         </div>
                         
@@ -92,7 +90,7 @@
                         <div class=" row">
                             <label for="current-date" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay mo so</label>
                             <div class="col-sm-10 col-md-6">
-                                <span class="form-control" readonly id="current-date"></span>
+                                <span class="form-control" id="current-date"></span>
                             </div>
                         </div>
                     </div>
@@ -115,9 +113,10 @@
     <section class="container">
         <p class="text-center" id="rate-info">lai suat <strong>0.55%.</strong> Den han ngay xxx. Du thu xxx</p>
         <div class="row m-2">
-            <button type="button" name="cancel" id="cancel" class="btn-warning btn-block col-md-3 col-sm-4">Cancel</button>
+            <button type="button" name="cancel" id="cancel" class="btn-warning btn-block col-md-3 col-sm-4" onclick="clearRequest()">Cancel</button>
             <div class="col-md-6 col-sm-4"></div>
             <button type="button" name="create" id="create-book" class="btn-primary btn-block col-md-3 col-sm-4">Confirm</button>
         </div>
     </section>
     <div class="footer"></div>
+    
