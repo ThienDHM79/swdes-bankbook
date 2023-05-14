@@ -1,10 +1,8 @@
 'use strict';
-const { Result } = require('express-validator');
 const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
 const ConfigService = require('../services/ConfigService');
-const { GetCustomerbyId } = require('../services/CustomerService');
 const CustomerService = require('../services/CustomerService');
 
 module.exports = class Bankbook{

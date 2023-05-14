@@ -30,4 +30,21 @@ function clearRequest(){
     document.getElementById('booktype').innerText = "";
     document.getElementById('current-date').innerText = "";
 }
+
+async function getCustomerName(inputcmnd){
+    let res = await fetch('/customerid', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify( {inputcmnd })
+    });
+    if (res.status == 200){
+        let json = await res.json();
+        document.getElementById('name').innerText = `(${json.name})`;
+        console.log(`ten khach la ${json.name}`);
+    }
+    
+}
     
