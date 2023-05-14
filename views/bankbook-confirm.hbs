@@ -1,10 +1,11 @@
+<form action="/bankbook/post" method="post">
     <section class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class=" row m-2">
                     <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">Ma so tiet kiem</label>
                     <div class="col-sm-10 col-md-6">
-                      <input type="text" class="form-control m-1" id="temp-bankbookid" value="{{bookNo}}" readonly>
+                    <input type="text" class="form-control m-1" id="temp-bankbookid" value="{{bookNo}}" readonly>
                     </div>
                 </div>
             </div>
@@ -12,7 +13,7 @@
                 <div class=" row m-2 ">
                     <label for="temp-account" class="col-sm-2 col-md-6 col-form-label text-dark">So tien giao dich</label>
                     <div class="col-sm-10 col-md-6">
-                      <input type="number" class="form-control m-1" id="temp-amount" value="{{amount}}" >
+                    <input name= "amount" type="number" class="form-control m-1" id="temp-amount" value="{{amount}}" >
                 </div>
             </div>
             
@@ -22,17 +23,18 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Loai tiet kiem</label>
                 </div>
-            <select class="custom-select" id="temp-booktype">
-                <option value="demand">khong ky han</option>
-                <option value="3 thang">3 thang</option>
-                <option value="6 thang">6 thang</option>
+            <select class="custom-select" id="temp-booktype" name="savetype">
+                {{#each saveType}}
+                <option value="{{savetype}}">{{savetype}}</option>
+                {{/each}}
             </select>
             </div>
         </div>
         <div class="container">
-            <button onclick="createNotice()" class="btn btn-primary btn-block m-2" id="btn-create">Tao phieu yeu cau</button>
+            <button onclick="createNotice()" type="button" class="btn btn-primary btn-block m-2" id="btn-create">Tao phieu yeu cau</button>
         </div>
     </section>
+
     <section class="container">
         <div class="container bg-secondary-2" id="request-confirm">
             <h5 class="text-center text-white">So tiet kiem</h5>
@@ -115,8 +117,9 @@
         <div class="row m-2">
             <button type="button" name="cancel" id="cancel" class="btn-warning btn-block col-md-3 col-sm-4" onclick="clearRequest()">Cancel</button>
             <div class="col-md-6 col-sm-4"></div>
-            <button type="button" name="create" id="create-book" class="btn-primary btn-block col-md-3 col-sm-4">Confirm</button>
+            <button type="submit" name="create" id="create-book" class="btn-primary btn-block col-md-3 col-sm-4">Post</button>
         </div>
     </section>
+    </form>
     <div class="footer"></div>
     

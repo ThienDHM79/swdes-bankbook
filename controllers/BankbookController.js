@@ -1,7 +1,9 @@
 'use strict';
+const { Result } = require('express-validator');
 const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
+const ConfigService = require('../services/ConfigService');
 const { GetCustomerbyId } = require('../services/CustomerService');
 const CustomerService = require('../services/CustomerService');
 
@@ -55,11 +57,29 @@ module.exports = class Bankbook{
             //wait to refactor
             let BookNo = await BankbookService.generateBookNo();
             res.locals.bookNo = BookNo;
+
+            //get savetype
+            let SaveType =  await ConfigService.getAllSaveType();
+            res.locals.saveType = SaveType;
+
             res.render('bankbook-confirm');
         } else {
             res.redirect('/request-create');
         }
+    }
 
+    static async createBankbook( req, res){
+        try{
+            let BookCreate = await BankbookService.createBankbook(req);
+            if (!BookCreate){
+                res.status(404).json('no bankbook created');
+            }
+            let message = `new bankbook created ${BookCreate.name} at ${BookCreate.openDate}`;
+            res.render('error', {message});
+        }
+        catch(error){
+            res.status(500).json( { error : error});
+        }
     }
     
 }

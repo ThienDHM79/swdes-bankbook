@@ -35,5 +35,8 @@ body('amount').custom( value => ConfigService.checkMinInput(value)),
     controller.showConfirm
 );
 
+//post len db
+router.post("/post", controller.createBankbook);
+
 
 module.exports = router;
