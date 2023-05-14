@@ -21,9 +21,10 @@ module.exports = class BankbookService{
         }
     }
 
-    static async createBankbook(req){
+    static async createBankbook(req,res){
         try{
-            let customerId = req.session.customerId;
+            let customerId = req.session.customer.id;
+            console.log(customerId);
             let bookName = "b" + req.body.savetype + "-" + req.body.cmnd;
             let saveType = await ConfigService.getSaveTypebyName(req.body.savetype);
             let Newbankbook = await models.Bankbook.create({

@@ -53,6 +53,7 @@ module.exports = class Bankbook{
         let customer = await CustomerService.GetCustomerbyCMND(req.body.customercmnd);
         if (customer){
             res.locals.customer = customer;
+            req.session.customer = customer;
             res.locals.amount  = req.body.amount;
             //wait to refactor
             let BookNo = await BankbookService.generateBookNo();
@@ -70,7 +71,7 @@ module.exports = class Bankbook{
 
     static async createBankbook( req, res){
         try{
-            let BookCreate = await BankbookService.createBankbook(req);
+            let BookCreate = await BankbookService.createBankbook(req, res);
             if (!BookCreate){
                 res.status(404).json('no bankbook created');
             }
