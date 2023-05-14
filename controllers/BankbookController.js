@@ -12,6 +12,10 @@ module.exports = class Bankbook{
             if(!bankbooks){
                 res.status(404).json("no books");
             }
+            bankbooks.forEach( async book =>{
+                let customer = await CustomerService.GetCustomerbyId(book.customerId);
+                book.customerName = customer.name;
+            })
             res.locals.bankbooks = bankbooks;
             res.render('report-book');
         } catch (error){
