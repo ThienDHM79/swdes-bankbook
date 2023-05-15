@@ -32,7 +32,6 @@ function clearRequest(){
 }
 
 async function getCustomerName(inputcmnd){
-    document.getElementById('check-btn').style.backgroundColor = "red";
     let res = await fetch('/customer?'+ new URLSearchParams( {
         cmnd: inputcmnd
     }));
@@ -40,5 +39,27 @@ async function getCustomerName(inputcmnd){
     document.getElementById('name').innerText = `${json.name}`;
     console.log(`ten khach la ${json.name}`);
     
+}
+
+async function getListBookbyCustomer(inputcmnd){
+    let res = await fetch('/bankbook/add?'+ new URLSearchParams( {
+        cmnd: inputcmnd
+    }));
+    let json = await res.json();
+
+    //render table in html
+    
+}
+
+//on going
+async function checkMinAmount(inputamount){
+    let res = await fetch('/bankbook/config?' + new URLSearchParams({
+        amount: inputamount
+    }));
+    let json = await res.json();
+
+    if (json){
+        document.getElementById('amount-min-message').innerText =  `${json.error}`;
+    }
 }
     

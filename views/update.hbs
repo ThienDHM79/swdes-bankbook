@@ -1,13 +1,13 @@
 
       <div class="container">
           <h4 class="text-center">Goi Tien</h4>
-        <form action="" method="post">
+        <form action="/add" method="post">
           <section class="input">
                 <div class="col-md-12">
                     <div class=" row m-2 ">
                         <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">CMND</label>
                         <div class="col-sm-10 col-md-6">
-                            <input type="number" class="form-control m-1" id="cmnd" value="1234567" name="cmnd" >
+                            <input type="number" required class="form-control m-1" id="cmnd" value="" name="cmnd" placeholder="so cmnd" >
                         </div>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
                     <div class=" row m-2 ">
                         <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">So tien giao dich</label>
                         <div class="col-sm-10 col-md-6">
-                            <input type="number" class="form-control m-1 money" id="amount" value="10 000" name="amount" data-type="currency" >
+                            <input type="number" required class="form-control m-1 money" id="amount" value="10 000" name="amount" data-type="currency" >
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,9 @@
                     </button>
                 </div>
             </div>
-
+            <div class="container">
+                <p  id="amount-min-message"></p>
+            </div>
           </section>
           <section>
               <table class="table table-striped">
@@ -52,7 +54,7 @@
                           <td>TK-DM</td>
                           <td>2023-03-05</td>
                           <td>5 000 000 VND</td>
-                          <td><input type="checkbox" name="chon" id="tk-dm"></td>
+                          <td><input type="radio" name="chon" id="tk-dm"></td>
                       </tr>
                   </tbody>
               </table>
@@ -63,7 +65,7 @@
           <p class="alert">
               yeu cau hop le
           </p>
-        </form>
+
         <section class="container" style="background-color: gainsboro;">
             <div class="container bg-secondary-2" id="request-confirm">
                 <h5 class="text-center text-white">Phieu yeu cau goi</h5>
@@ -148,6 +150,7 @@
                 </div>
             </div>
         </section>
+        </form>
       </div>
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">

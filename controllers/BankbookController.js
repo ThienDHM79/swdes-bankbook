@@ -80,6 +80,21 @@ module.exports = class Bankbook{
             res.status(500).json( { error : error});
         }
     }
+
+    //ongoing
+    static async checkMinInput(req, res){
+        try{
+            let config = ConfigService.checkMinInput (req.query.amount);
+            if (config){
+                if (parseInt(req.query.amount) < parseInt(config.amount)){
+                    return res.json({error: `so tien GD nho hon toi thieu la ${config.amount}` });
+                }
+            }            
+        }
+        catch(error){
+            res.status(500).json( { error : error});
+        }
+    }
     
 }
 // const controller = {};
