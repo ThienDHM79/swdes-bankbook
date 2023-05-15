@@ -8,5 +8,5 @@ const CustomerCtrl = require("../controllers/CustomerController");
 const { body, resultValidation } = require('express-validator');
 
 
-router.get('/customerid', CustomerCtrl.getCustomerbyCMND);
+router.get('/', CustomerCtrl.GetCustomerNamebyCMND);
 module.exports = router;

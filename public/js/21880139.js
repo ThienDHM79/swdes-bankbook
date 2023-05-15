@@ -32,19 +32,13 @@ function clearRequest(){
 }
 
 async function getCustomerName(inputcmnd){
-    let res = await fetch('/customerid', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify( {inputcmnd })
-    });
-    if (res.status == 200){
-        let json = await res.json();
-        document.getElementById('name').innerText = `(${json.name})`;
-        console.log(`ten khach la ${json.name}`);
-    }
+    document.getElementById('check-btn').style.backgroundColor = "red";
+    let res = await fetch('/customer?'+ new URLSearchParams( {
+        cmnd: inputcmnd
+    }));
+    let json = await res.json();
+    document.getElementById('name').innerText = `${json.name}`;
+    console.log(`ten khach la ${json.name}`);
     
 }
     
