@@ -15,7 +15,7 @@
                     <div class=" row m-2 ">
                         <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">So tien giao dich</label>
                         <div class="col-sm-10 col-md-6">
-                            <input type="number" required class="form-control m-1 money" id="amount" value="10 000" name="amount" data-type="currency" >
+                            <input type="number" required class="form-control m-1 money" id="temp-amount" value="" name="amount" data-type="currency" >
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="container m-2 d-flex flex-wrap">
                 <div class="col-md-12 justify-content-center d-flex">
-                    <button type="button" id="check-btn" onclick="getCustomerName(document.getElementById('cmnd').value)" class="btn-warning btn-block col-md-6">
+                    <button type="button" id="check-btn" onclick="getCustomerName(document.getElementById('cmnd').value);showCanAddBook(document.getElementById('cmnd').value)" class="btn-warning btn-block col-md-6">
                         Check
                     </button>
                 </div>
@@ -39,27 +39,26 @@
                 <p  id="amount-min-message"></p>
             </div>
           </section>
-          <section>
-              <table class="table table-striped">
+          <section id="section-table">
+              <table class="table table-striped" id="table">
                   <thead>
                       <tr>
-                          <th scope="col">Ma so tiet kiem</th>
+                          <th scope="col">Ma so</th>
                           <th scope="col">Ngay mo</th>
                           <th scope="col">So du</th>
-                          <th scope="col">Chon</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>TK-DM</td>
-                          <td>2023-03-05</td>
-                          <td>5 000 000 VND</td>
-                          <td><input type="radio" name="chon" id="tk-dm"></td>
-                      </tr>
                   </tbody>
               </table>
+              <div class="container d-flex flex-wrap">
+                  <label for="bookid-toadd" class="col-md-4">Chọn sổ</label>
+                  <select class="custom-select col-md-8 justify-content-center d-flex" name="bookid-toadd" id="booktoadd">
+
+                  </select>
+              </div>
               <div class="container text-center">
-                <button type="button" class="btn btn-primary btn-block m-2">Tao phieu goi</button>
+                <button type="button" onclick="createAddNotice()" class="btn btn-primary btn-block m-2">Tao phieu goi</button>
               </div>
           </section>
           <p class="alert">
@@ -73,36 +72,36 @@
                     <div class="row">
                         <div class="col">
                             <div class=" row">
-                                <label for="bankbookid" class="col-sm-4 col-md-6 col-form-label text-dark">Ma so</label>
+                                <label for="bankbookid" class="col-sm-4 col-md-4 col-form-label text-dark">Ma so</label>
                                 <div class="col-sm-8 col-md-6">
-                                  <input type="text" readonly class="form-control" id="bankbokid" value="12">
+                                  <span type="text" readonly class="form-control" id="bankbookid" value="">
                                 </div>
                             </div>
                             
                         </div>
                         <div class="col">
                             <div class="row">
-                                <label for="booktype" class="col-sm-4 col-md-6 col-form-label text-dark">Loai tiet kiem</label>
-                                <div class="col-sm-8 col-md-6">
-                                  <input type="text" readonly class="form-control " id="booktype" value="3 thang">
+                                <label for="booktype" class="col-sm-4 col-md-4 col-form-label text-dark">Loai tiet kiem</label>
+                                <div class="col-sm-8 col-md-8">
+                                  <span type="text" readonly class="form-control" id="booktype" value="3 thang">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-8">
                             <div class=" row">
-                                <label for="customername" class="col-sm-2 col-md-6 col-form-label text-dark">Khach hang</label>
-                                <div class="col-sm-10 col-md-6">
-                                  <input type="text" readonly class="form-control" id="customername" value="{{name}}">
+                                <label for="customername" class="col-sm-2 col-md-3 col-form-label text-dark">Khach hang</label>
+                                <div class="col-sm-10 col-md-9">
+                                  <span type="text" readonly class="form-control" id="customername" value="">
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class=" row">
-                                <label for="cmnd" class="col-sm-2 col-md-6 col-form-label text-dark">CMND</label>
-                                <div class="col-sm-10 col-md-6">
-                                  <input type="text" readonly class="form-control" id="cmnd" value="{{cmnd}}" name="cmnd">
+                                <label for="cmnd" class="col-sm-2 col-md-3 col-form-label text-dark">CMND</label>
+                                <div class="col-sm-10 col-md-9">
+                                  <span type="text" readonly class="form-control" id="show-cmnd" value="{{cmnd}}" name="cmnd">
                                 </div>
                             </div>
                         </div>
@@ -112,7 +111,7 @@
                             <div class=" row">
                                 <label for="address" class="col-sm-2 col-md-3 col-form-label text-dark">Dia chi</label>
                                 <div class="col-sm-10 col-md-9">
-                                  <input type="text" readonly class="form-control" id="address" value="{{address}}">
+                                  <span type="text" readonly class="form-control" id="show-address" value="">
                                 </div>
                             </div>
                         </div>
@@ -120,9 +119,9 @@
                     <div class="row">
                         <div class="col">
                             <div class=" row">
-                                <label for="opendate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay cap nhat</label>
+                                <label for="updatedate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay cap nhat</label>
                                 <div class="col-sm-10 col-md-6">
-                                  <input type="date" readonly class="form-control" id="opendate" value="{{updatedAt}}">
+                                  <span type="date" readonly class="form-control" id="updatedate" value="">
                                 </div>
                             </div>
                         </div>
@@ -132,7 +131,7 @@
                             <div class=" row">
                                 <label for="amount" class="col-sm-2 col-md-6 col-form-label text-dark">So tien goi</label>
                                 <div class="col-sm-10 col-md-6">
-                                  <input type="number" readonly class="form-control" id="amount" value="fake 10 000 000">
+                                  <span  readonly class="form-control" id="amount" value="fake 10 000 000">
                                 </div>
                             </div>
                         </div>

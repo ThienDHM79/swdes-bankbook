@@ -46,6 +46,7 @@ app.use('/', require('./routes/indexRouter'));
 app.use('/bankbook', require('./routes/BankbookRouter'));
 app.use('/update', require('./routes/TransactRouter') );
 app.use('/customer', require('./routes/CustomerRouter'));
+app.use('/transact', require('./routes/TransactRouter'));
 
 //create Table in DB
 app.get('/createTables', (req,res)=> {

@@ -40,4 +40,31 @@ module.exports = class BankbookService{
             console.log(`could not create ${error}`);
         }
     }
+
+    static async getBookbyCustomerid(req, res){
+        try {
+            let customerid = isNaN(req.body.customerid) ? 0: parseInt(req.body.customerid);
+            let options = {
+                attributes: ['id', 'openDate', 'amount', 'savetype'],
+                where: {
+                    customerId : customerid
+                }
+            };
+            let Bankbooks = await models.Bankbook.findAll(options);
+
+            return Bankbooks;
+        } catch (error){
+            console.log(`could not fetch ${error}`);
+        }
+    }
+
+    static async getBookbyId(req, res){
+        try {
+            let Bankbook = await models.Bankbook.findByPk(req.query.id);
+            return Bankbook;
+
+        } catch (error){
+            console.log(`could not fetch ${error}`);
+        }
+    }
 }

@@ -84,15 +84,43 @@ module.exports = class Bankbook{
     //ongoing
     static async checkMinInput(req, res){
         try{
-            let config = ConfigService.checkMinInput (req.query.amount);
+            let config = await ConfigService.checkMinInput (req.query.amount);
+            let result = 'OK';
+            //SETUP on-going, turn on khi update xong configservice chi return ko check
             if (config){
-                if (parseInt(req.query.amount) < parseInt(config.amount)){
-                    return res.json({error: `so tien GD nho hon toi thieu la ${config.amount}` });
+                if (parseInt(req.query.amount) < parseInt(config.minInput)){
+                    result = `so nhap toi thieu nho hon quy dinh la ${config.minInput}`;
                 }
-            }            
+            }
+            return res.json ( { message: result});            
         }
         catch(error){
             res.status(500).json( { error : error});
+            throw new Error(`${error}`);
+        }
+    }
+    static async getBookbyId(req, res){
+        try{
+            let Bankbook = await BankbookService.getBookbyId(req, res);
+            return res.json ( {
+                Bankbook
+            });
+
+        } catch(error){
+            res.status(500).json( {error : error});
+        }
+    }
+
+    //ONGOING need update to return list of bankbook to FRONT END
+    static async getBookbyCustomerid(req, res){
+        try{
+            let Bankbooks = await BankbookService.getBookbyCustomerid(req, res);
+            return res.json ( {
+                Bankbooks
+            });
+
+        } catch(error){
+            res.status(500).json( { error: error});
         }
     }
     
