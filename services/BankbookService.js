@@ -67,4 +67,27 @@ module.exports = class BankbookService{
             console.log(`could not fetch ${error}`);
         }
     }
+
+    static async updateBookAdd(req,res){
+        try{
+            let Bankbook = await models.Bankbook.findByPk(req.session.bookid);
+            let updateAmount = parseInt(Bankbook.amount) + parseInt(req.session.amount) ;
+            await models.Bankbook.update(
+                {
+                    amount: updateAmount
+                },
+                {
+                    where: {
+                        id: req.session.bookid
+                    }
+                }
+            ). then( (result) => {console.log(result)});
+            
+            Bankbook = await models.Bankbook.findByPk(req.session.bookid);
+            return Bankbook;
+
+        } catch (error){
+            console.log(`cannot update ${error}`);
+        }
+    }
 }
