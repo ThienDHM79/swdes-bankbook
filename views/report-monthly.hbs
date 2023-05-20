@@ -1,0 +1,64 @@
+    <div class="btn-toolbar m-2 d-flex justify-content-center" role="toolbar" aria-label="">
+      <div class="btn-group" role="group" aria-label="">
+        <a name="" id="" class="btn btn-primary" href="/report/reportbook" role="button">Danh sach so</a>
+        <a name="" id="" class="btn btn-warning" href="/report/report-monthly" role="button">Bao cao dong mo so</a>
+        <a name="" id="" class="btn btn-info" href="#" role="button">Doanh thu ngay</a>
+      </div>
+    </div>
+    <div class="container">
+      <h4 class="text-center m-2 p-2">Báo cáo đóng mở sổ tháng</h4>
+    </div>
+    <form action="./report-monthly/search" method="POST">
+      <div class="row m-1 d-flex justify-content-center">
+        <div class="input-group mb-2 col-md-6">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelectType">Loai tiet kiem</label>
+            </div>
+        <select class="custom-select" id="temp-booktype" name="booktype">
+            <option>Choose...</option>
+            <option value="demand">khong ky han</option>
+            <option value="3 thang">3 thang</option>
+            <option value="6 thang">6 thang</option>
+        </select>
+        </div>
+        <div class="input-group col-md-4">
+          <label for="daymonth"class="mb-2 mx-2 p-2">Tháng</label>
+          <input type="month" class="mb-2"name="month" id="monthly">
+        </div>
+        <div class="container">
+          <button type="submit" class="btn btn-primary float-right m-2">Search</button>
+        </div>
+      </div>
+    </form>
+    <div class="container d-flex justify-content-center">
+
+      <table id="html-data-table" class="table table-stripped w-auto">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Ngày</th>
+            <th scope="col">Số mở</th>
+            <th scope="col">Số đóng</th>
+            <th scope="col">Chênh lệch</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#with DayLine}}
+          <tr class="book-item">
+              <td>1</td>
+              <td>{{month}}</td>
+              <td>{{OpenSum}}</td>
+              <td>{{ClosedSum}}</td>
+              <td>{{Delta}}</td>
+          </tr>
+          {{/with}}
+          <tr class="book-item">
+              <td>1</td>
+              <td>2023-05-03</td>
+              <td>20 000 000</td>
+              <td>5 000 000</td>
+              <td>15 000 000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

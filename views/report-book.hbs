@@ -1,0 +1,30 @@
+    <div class="btn-toolbar m-2 d-flex justify-content-center" role="toolbar" aria-label="">
+      <div class="btn-group" role="group" aria-label="">
+        <a name="" id="" class="btn btn-primary" href="/report/reportbook" role="button">Danh sach so</a>
+        <a name="" id="" class="btn btn-warning" href="/report/report-monthly" role="button">Bao cao dong mo so</a>
+        <a name="" id="" class="btn btn-info" href="#" role="button">Doanh thu ngay</a>
+      </div>
+    </div>
+    <h1 class="text-center">Danh sach so tiet kiem</h1>
+    <div class="container">
+      <table id="html-data-table" class="table">
+        <thead>
+          <tr>
+            <th scope="col">bankbook name</th>
+            <th scope="col">save type</th>
+            <th scope="col">customer name</th>
+            <th scope="col">amount</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each bankbooks}}
+          <tr class="book-item">
+              <td>{{name}}</td>
+              <td>{{savetype}}</td>
+              <td>{{customerName}}</td>
+              <td>{{amount}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>      
