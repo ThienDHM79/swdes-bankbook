@@ -4,16 +4,13 @@ const CustomerService = require('../services/CustomerService');
 const BankbookService = require("../services/CustomerService");
 
 module.exports = class Customer{
-    static async Exist(req,res){
+    static async GetCustomerNamebyCMND(req,res){
         try {
-            let customercmnd = await CustomerService.Exist(req);
-            if(!customercmnd){
-                res.locals.customercmnd = customercmnd;
-            }
-            res.sendStatus(200);
+            let customer = await CustomerService.GetCustomerbyCMND(req.query.cmnd);
+            return res.json(customer);
         } catch (error){
             res.status(500).json( { error: error});
-            throw new Error(`Khong tim thay khach hang. ${error}`);
+            //throw new Error(`${error}`);
         }
         
     }

@@ -1,7 +1,7 @@
 
       <div class="container">
-          <h4 class="text-center">Rut Tien</h4>
-        <form action="/transact/close" method="post">
+          <h4 class="text-center">Goi Tien</h4>
+        <form action="/transact/add" method="post">
           <section class="input">
                 <div class="col-md-12">
                     <div class=" row m-2 ">
@@ -30,13 +30,12 @@
             </div>
             <div class="container m-2 d-flex flex-wrap">
                 <div class="col-md-12 justify-content-center d-flex">
-                    <button type="button" id="check-btn" onclick="getCustomerName(document.getElementById('cmnd').value);showCanCloseBook(document.getElementById('cmnd').value)" class="btn-warning btn-block col-md-6">
+                    <button type="button" id="check-btn" onclick="getCustomerName(document.getElementById('cmnd').value);showCanAddBook(document.getElementById('cmnd').value)" class="btn-warning btn-block col-md-6">
                         Check
                     </button>
                 </div>
             </div>
             <div class="container">
-                <p id="alert"></p>
                 <p  id="amount-min-message"></p>
             </div>
           </section>
@@ -59,26 +58,38 @@
                   </select>
               </div>
               <div class="container text-center">
-                <button type="button" onclick="createCloseNotice()" class="btn btn-primary btn-block m-2">Tao phieu rut</button>
+                <button type="button" onclick="createAddNotice()" class="btn btn-primary btn-block m-2">Tao phieu goi</button>
               </div>
           </section>
+          <p class="alert">
+              yeu cau hop le
+          </p>
 
         <section class="container" style="background-color: gainsboro;">
             <div class="container bg-secondary-2" id="request-confirm">
-                <h5 class="text-center text-white">Phieu yeu cau rut</h5>
+                <h5 class="text-center text-white">Phieu yeu cau goi</h5>
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class=" row">
-                                <label for="bankbookid" class="col-sm-4 col-md-6 col-form-label text-dark">Ma so</label>
+                                <label for="bankbookid" class="col-sm-4 col-md-4 col-form-label text-dark">Ma so</label>
                                 <div class="col-sm-8 col-md-6">
                                   <span type="text" readonly class="form-control" id="bankbookid" value="">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="booktype" class="col-sm-4 col-md-4 col-form-label text-dark">Loai tiet kiem</label>
+                                <div class="col-sm-8 col-md-8">
+                                  <span type="text" readonly class="form-control" id="booktype" value="3 thang">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-8">
                             <div class=" row">
                                 <label for="customername" class="col-sm-2 col-md-3 col-form-label text-dark">Khach hang</label>
                                 <div class="col-sm-10 col-md-9">
@@ -86,11 +97,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class=" row">
+                                <label for="cmnd" class="col-sm-2 col-md-3 col-form-label text-dark">CMND</label>
+                                <div class="col-sm-10 col-md-9">
+                                  <span type="text" readonly class="form-control" id="show-cmnd" value="{{cmnd}}" name="cmnd">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class=" row">
-                                <label for="updatedate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay rut</label>
+                                <label for="address" class="col-sm-2 col-md-3 col-form-label text-dark">Dia chi</label>
+                                <div class="col-sm-10 col-md-9">
+                                  <span type="text" readonly class="form-control" id="show-address" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class=" row">
+                                <label for="updatedate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay cap nhat</label>
                                 <div class="col-sm-10 col-md-6">
                                   <span type="date" readonly class="form-control" id="updatedate" value="">
                                 </div>
@@ -100,9 +129,9 @@
                     <div class="row">
                         <div class="col">
                             <div class=" row">
-                                <label for="amount" class="col-sm-2 col-md-6 col-form-label text-dark">So tien rut</label>
+                                <label for="amount" class="col-sm-2 col-md-6 col-form-label text-dark">So tien goi</label>
                                 <div class="col-sm-10 col-md-6">
-                                  <span  readonly class="form-control" id="amount" value="">
+                                  <span  readonly class="form-control" id="amount" value="fake 10 000 000">
                                 </div>
                             </div>
                         </div>
@@ -112,9 +141,7 @@
         </section>
         <section>
             <div class="container m-2 d-flex flex-wrap">
-                <div class="col-md-6 col-sm-6 d-flex">
-                  <button type="reset" class="btn-warning btn-block col-md-6"> Clear</button>
-                </div>
+                    <div class="col-md-6 col-sm-6 d-flex"></div>
                 <div class="col-md-6 col-sm-6 justify-content-end d-flex">
                     <button type="submit" class="btn-primary btn-block col-md-6">
                         Post

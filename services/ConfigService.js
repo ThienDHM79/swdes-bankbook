@@ -3,11 +3,25 @@
 const models = require("../models");
 
 module.exports = class ConfigService{
+    //khong lay argument la savetype. gia dinh ko xoa savetype
     static async checkMinInput(input){
-        const  min = 100000;
-        if (parseInt(input) < parseInt(min)){
-            throw new Error(`so tien GD nho hon toi thieu la ${min}`);
+        try{
+            const  config = await models.SaveConfig.findOne({
+                where: {
+                    id : 1
+                }
+            });
+            if (config){
+                if (parseInt(input) < parseInt( config.minInput))
+                {
+                    throw new Error(`so tien giao dich toi thieu nho hon ${config.minInput}`);
+                }
+            }
+            return config;
+        } catch (error){
+            throw new Error(`${error}`);
         }
+        
     }
     static async getAllSaveType(){
         try{

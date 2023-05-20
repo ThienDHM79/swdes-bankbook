@@ -37,6 +37,13 @@ body('amount').custom( value => ConfigService.checkMinInput(value)),
 
 //post len db
 router.post("/post", controller.createBankbook);
+router.post("/list", controller.getBookbyCustomerid);
+router.post("/due/list", controller.getBookDuebyCustomerid);
+
+router.get("/config", controller.checkMinInput);
+router.get("/",controller.getBookbyId);
+
+
 
 
 module.exports = router;

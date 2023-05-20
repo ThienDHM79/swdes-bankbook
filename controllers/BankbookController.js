@@ -1,10 +1,8 @@
 'use strict';
-const { Result } = require('express-validator');
 const res = require('express/lib/response');
 const models = require('../models');
 const BankbookService = require("../services/BankbookService");
 const ConfigService = require('../services/ConfigService');
-const { GetCustomerbyId } = require('../services/CustomerService');
 const CustomerService = require('../services/CustomerService');
 
 module.exports = class Bankbook{
@@ -86,6 +84,77 @@ module.exports = class Bankbook{
             res.status(500).json( { error : error});
         }
     }
+
+    //ongoing
+    static async checkMinInput(req, res){
+        try{
+            let config = await ConfigService.checkMinInput (req.query.amount);
+            let result = 'OK';
+            //SETUP on-going, turn on khi update xong configservice chi return ko check
+            if (config){
+                if (parseInt(req.query.amount) < parseInt(config.minInput)){
+                    result = `so nhap toi thieu nho hon quy dinh la ${config.minInput}`;
+                }
+            }
+            return res.json ( { message: result});            
+        }
+        catch(error){
+            res.status(500).json( { error : error});
+            throw new Error(`${error}`);
+        }
+    }
+    static async getBookbyId(req, res){
+        try{
+            let Bankbook = await BankbookService.getBookbyId(req, res);
+            return res.json ( {
+                Bankbook
+            });
+
+        } catch(error){
+            res.status(500).json( {error : error});
+        }
+    }
+
+    static async getBookbyCustomerid(req, res){
+        try{
+            let Bankbooks = await BankbookService.getBookbyCustomerid(req, res);
+            return res.json ( {
+                Bankbooks
+            });
+
+        } catch(error){
+            res.status(500).json( { error: error});
+        }
+    }
+
+    static async getBookDuebyCustomerid(req,res){
+        try{
+            let Bankbooks = await BankbookService.getBookbyCustomerid(req, res);
+            let Savetypes = await ConfigService.getAllSaveType();
+            let curDate = new Date();
+            let BankbooksOn = Bankbooks.filter( (book) => {return book.status == true;});
+            const  ONEDAY = 1000 * 3600 * 24;
+            let filterBankbooks = BankbooksOn.filter( (book) => {
+                //tim time period cua bankbook
+                book.period = Savetypes.find( (type) => type.id == book.savetypeId ).timeperiod;
+                book.rate = Savetypes.find( (type) => type.id == book.savetypeId ).rate;
+                let DateDiffer = (curDate.getTime() - book.openDate.getTime() ) / ONEDAY;
+                if ( book.status == true && (DateDiffer/ book.period) >= 1) {
+                    let InterestPeriod = Math.floor(DateDiffer/book.period);
+                    book.amount = book.amount + book.amount*InterestPeriod * book.rate;
+                    return book;
+                }
+            } );
+            return res.json ( {
+                Bankbooks:filterBankbooks
+            });
+
+        } catch(error){
+            res.status(500).json( { error: error});
+        }
+    }
+
+
     
 }
 // const controller = {};
