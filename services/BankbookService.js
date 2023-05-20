@@ -45,7 +45,6 @@ module.exports = class BankbookService{
         try {
             let customerid = isNaN(req.body.customerid) ? 0: parseInt(req.body.customerid);
             let options = {
-                attributes: ['id', 'openDate', 'amount', 'savetype'],
                 where: {
                     customerId : customerid
                 }
@@ -74,7 +73,8 @@ module.exports = class BankbookService{
             let updateAmount = parseInt(Bankbook.amount) + parseInt(req.session.amount) ;
             await models.Bankbook.update(
                 {
-                    amount: updateAmount
+                    amount: updateAmount,
+                    updatedAt: new Date()
                 },
                 {
                     where: {
@@ -90,4 +90,72 @@ module.exports = class BankbookService{
             console.log(`cannot update ${error}`);
         }
     }
+
+    static async updateBookClose(req,res){
+        try{
+            let Bankbook = await models.Bankbook.findByPk(req.session.bookid);
+            await models.Bankbook.update(
+                {
+                    status: false,
+                    udpatedAt: new Date()
+                },
+                {
+                    where: {
+                        id: req.session.bookid
+                    }
+                }
+            ). then( (result) => {console.log(result)});
+            
+            Bankbook = await models.Bankbook.findByPk(req.session.bookid);
+            return Bankbook;
+
+        } catch (error){
+            console.log(`cannot update ${error}`);
+        }
+    }
+
+    static async calculateInterest(book){
+        let Savetypes = await ConfigService.getAllSaveType();
+        let curDate = new Date();
+        const ONEDAY = 1000 * 3600 * 24;
+
+        book.period = Savetypes.find( (type) => type.id == book.savetypeId ).timeperiod;
+        book.rate = Savetypes.find( (type) => type.id == book.savetypeId ).rate;
+
+        let DateDiffer = (curDate.getTime() - book.openDate.getTime() ) / ONEDAY;
+
+        if ( book.status == true && (DateDiffer/ book.period) >= 1) {
+            let InterestPeriod = Math.floor(DateDiffer/book.period);
+            book.amount = book.amount + Math.floor(book.amount*InterestPeriod * book.rate);
+            console.log(`${book.id} have rate ${book.rate}, standard ${book.period} days, open ${DateDiffer} days with ${DateDiffer/book.period} period `);
+            return book;
+        }
+    }
+    
+    static async updateInterest(req, res){
+        try {
+            let Bankbook = await models.Bankbook.findByPk(req.session.bookid);
+            let ValidBook  = await this.calculateInterest(Bankbook);
+            if (ValidBook){
+                await models.Bankbook.update(
+                    {
+                        amount: ValidBook.amount,
+                        updatedAt: new Date()
+                    },
+                    {
+                        where: {
+                            id: ValidBook.id
+                        }
+                    }
+                ). then ((result) => {console.log (result)} );
+            }
+            let UpdatedBook = models.Bankbook.findByPk(req.session.bookid);
+            return UpdatedBook;
+
+        } catch (error){
+            console.log( `cannot update ${error}`);
+        }
+    }
+
+
 }

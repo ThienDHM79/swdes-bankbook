@@ -111,7 +111,6 @@ module.exports = class Bankbook{
         }
     }
 
-    //ONGOING need update to return list of bankbook to FRONT END
     static async getBookbyCustomerid(req, res){
         try{
             let Bankbooks = await BankbookService.getBookbyCustomerid(req, res);
@@ -123,6 +122,35 @@ module.exports = class Bankbook{
             res.status(500).json( { error: error});
         }
     }
+
+    static async getBookDuebyCustomerid(req,res){
+        try{
+            let Bankbooks = await BankbookService.getBookbyCustomerid(req, res);
+            let Savetypes = await ConfigService.getAllSaveType();
+            let curDate = new Date();
+            let BankbooksOn = Bankbooks.filter( (book) => {return book.status == true;});
+            const  ONEDAY = 1000 * 3600 * 24;
+            let filterBankbooks = BankbooksOn.filter( (book) => {
+                //tim time period cua bankbook
+                book.period = Savetypes.find( (type) => type.id == book.savetypeId ).timeperiod;
+                book.rate = Savetypes.find( (type) => type.id == book.savetypeId ).rate;
+                let DateDiffer = (curDate.getTime() - book.openDate.getTime() ) / ONEDAY;
+                if ( book.status == true && (DateDiffer/ book.period) >= 1) {
+                    let InterestPeriod = Math.floor(DateDiffer/book.period);
+                    book.amount = book.amount + book.amount*InterestPeriod * book.rate;
+                    return book;
+                }
+            } );
+            return res.json ( {
+                Bankbooks:filterBankbooks
+            });
+
+        } catch(error){
+            res.status(500).json( { error: error});
+        }
+    }
+
+
     
 }
 // const controller = {};

@@ -1,6 +1,96 @@
 'use strict';
 
 const { application } = require("express");
+async function getCustomerName(inputcmnd){
+    let res = await fetch('/customer?'+ new URLSearchParams( {
+        cmnd: inputcmnd
+    }));
+    let json = await res.json();
+    if (!json){
+        document.getElementById('alert') ='no data';
+    } else {
+        document.getElementById('name').innerText = `${json.name}`;
+        document.getElementById('show-address').innerText = `${json.address}`;
+        document.getElementById('alert') ='';
+        return json;
+    }
+    }
+
+async function getBookbyId(bookid){
+    let res = await fetch('/bankbook?' + new URLSearchParams( {
+        id: bookid
+    }));
+    let json = await res.json();
+    if(!json){
+        return null;
+    }
+    return json;
+}
+
+async function getListBookbyCustomerCMND(inputcmnd){
+    //get customer id
+    let resCustomer = await fetch('/customer?'+ new URLSearchParams( {
+       cmnd: inputcmnd
+   }));
+   let jsonCustomer = await resCustomer.json();
+   let customerid = parseInt(jsonCustomer.id);
+
+   //get bankbook list
+   let resBookList = await fetch('/bankbook/list?',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify( {customerid})
+    });
+    let jsonData = await resBookList.json();
+    if (!jsonData){
+        return null;
+    }
+    return jsonData;
+    
+}
+async function getListBookDuebyCustomerCMND(inputcmnd){
+    //get customer id
+    let resCustomer = await fetch('/customer?'+ new URLSearchParams( {
+       cmnd: inputcmnd
+   }));
+   let jsonCustomer = await resCustomer.json();
+   let customerid = parseInt(jsonCustomer.id);
+
+   //get bankbook list
+   let resBookList = await fetch('/bankbook/due/list?',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify( {customerid})
+    });
+    let jsonData = await resBookList.json();
+    if (!jsonData){
+        return null;
+    }
+    return jsonData;
+}
+
+
+//on going
+async function checkMinAmount(inputamount){
+    let res = await fetch('/bankbook/config?' + new URLSearchParams({
+        amount: inputamount
+    }));
+    let json = await res.json();
+
+    if (json){
+        if (json.hasOwnProperty('error'))
+        document.getElementById('amount-min-message').innerText =  "ERROR!";
+    }
+}
+
+
+
 function createNotice(){
     const bookNo = document.getElementById('temp-bankbookid').value;
     const amount = document.getElementById('temp-amount').value;
@@ -31,68 +121,25 @@ function clearRequest(){
     document.getElementById('current-date').innerText = "";
 }
 
-async function getCustomerName(inputcmnd){
-    let res = await fetch('/customer?'+ new URLSearchParams( {
-        cmnd: inputcmnd
-    }));
-    let json = await res.json();
-    document.getElementById('name').innerText = `${json.name}`;
-    document.getElementById('show-address').innerText = `${json.address}`;
-    return json;
-}
-
-async function getBookbyId(bookid){
-    let res = await fetch('/bankbook?' + new URLSearchParams( {
-        id: bookid
-    }));
-    let json = await res.json();
-    return json;
-}
-
-
-
-//on going
-async function checkMinAmount(inputamount){
-    let res = await fetch('/bankbook/config?' + new URLSearchParams({
-        amount: inputamount
-    }));
-    let json = await res.json();
-
-    if (json){
-        if (json.hasOwnProperty('error'))
-        document.getElementById('amount-min-message').innerText =  "ERROR!";
-    }
-}
-
 async function showCanAddBook(inputcmnd){
     let jsonData = await getListBookbyCustomerCMND (inputcmnd);
     let filteredData = jsonData.Bankbooks.filter( (book) => {
-        return book.savetype == 'demand';
+        return book.savetype == 'demand' && book.status == true;
     });
+    if (!filteredData){
+        document.getElementById('alert').innerText = "no bankbook valid to add";
+    }
     convertTable(filteredData);
     addSelect(filteredData);
 }
-
-async function getListBookbyCustomerCMND(inputcmnd){
-    //get customer id
-    let resCustomer = await fetch('/customer?'+ new URLSearchParams( {
-       cmnd: inputcmnd
-   }));
-   let jsonCustomer = await resCustomer.json();
-   let customerid = parseInt(jsonCustomer.id);
-
-   //get bankbook list
-   let resBookList = await fetch('/bankbook/list?',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify( {customerid})
-    });
-    let jsonData = await resBookList.json();
-    return jsonData;
-    
+async function showCanCloseBook(inputcmnd){
+    let date  = new Date();
+    let jsonData = await getListBookDuebyCustomerCMND (inputcmnd);
+    if (!jsonData){
+        document.getElementById('alert').innerText = "no bankbook valid to close";
+    }
+    convertTable(jsonData.Bankbooks);
+    addSelect(jsonData.Bankbooks);
 }
 
 async function createAddNotice(){
@@ -118,7 +165,29 @@ async function createAddNotice(){
     document.getElementById('amount').innerText = currencyFormat(parseInt(amount));
 
 }
+
+async function createCloseNotice(){
+    //get bookid from select
+    let bookEle= document.getElementById('booktoadd');
+    let bookTypeIndex = bookEle.selectedIndex;
+    let bookid = bookEle.selectedOptions[0].value;
+    
+    //get amount
+    let amount = document.getElementById('temp-amount').value;
+    console.log(amount);
+    //update phieu yeu cau
+    document.getElementById('bankbookid').innerText = bookid;
+
+    document.getElementById('customername').innerText = document.getElementById('name').innerText;
+
+    let date = new Date();
+    document.getElementById('updatedate').innerText = convertDateString(date);
+    document.getElementById('amount').innerText = currencyFormat(parseInt(amount));
+
+}
+
 function convertTable(jsonData){
+    console.log(jsonData);
     //remove table body
     $('#table tbody').empty();
 
@@ -141,17 +210,6 @@ function convertTable(jsonData){
     let td3 = $("<td>");
     td3.text(currencyFormat(item.amount));
     tr.append(td3);
-
-    
-       // Get the values of the current object in the JSON data
-       let vals = Object.values(item);
-       
-       // Loop through the values and create table cells
-    //    $.each(vals, (i, elem) => {
-    //       let td = $("<td>");
-    //       td.text(elem); // Set the value as the text of the table cell
-    //       tr.append(td); // Append the table cell to the table row
-    //    });
        table.append(tr); // Append the table row to the table
     });
 }
@@ -167,6 +225,10 @@ function addSelect(jsonData){
         select.add(option);
     });
 }
+
+/* Cac ham format data 
+*/
+
 function convertDateString(inputDate){
 
     let date = new Date(inputDate)

@@ -36,4 +36,26 @@ body('amount').custom( value => ConfigService.checkMinInput(value)),
     },
     TransactCtrl.createTransactAdd
 );
+
+router.post("/close",
+//body('cmnd').notEmpty().withMessage('CMND is required'),
+// body('cmnd').custom(value => CustomerService.GetCustomerbyCMND(value)),
+//     (req, res, next) => {
+//         let errors = validationResult(req);
+//         if (!errors.isEmpty()){
+//             let errorArray = errors.array();
+//             let message = '';
+//             for (let i = 0; i < errorArray.length; i++) {
+//                 message += errorArray[i].msg + "<br/>"
+//             }
+//             return res.render('error', {message});
+//         }
+//         next();
+//     },
+    (req,res, next) => {
+        req.session.bookid = req.body.bookid;
+        next();
+    },
+    TransactCtrl.createTransactClose
+);
 module.exports = router;

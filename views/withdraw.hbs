@@ -1,20 +1,133 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Withdraw</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      <h2 class="text-center">Withdraw Page</h2>
+      <div class="container">
+          <h4 class="text-center">Rut Tien</h4>
+        <form action="/transact/close" method="post">
+          <section class="input">
+                <div class="col-md-12">
+                    <div class=" row m-2 ">
+                        <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">CMND</label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="number" required class="form-control m-1" id="cmnd" value="" name="cmnd" placeholder="so cmnd" >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class=" row m-2 ">
+                        <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">So tien giao dich</label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="number" required class="form-control m-1 money" id="temp-amount" value="" name="amount" data-type="currency" >
+                        </div>
+                    </div>
+                </div>
+
+            <div class="col-md-12">
+                <div class=" row m-2">
+                    <label for="temp-account" class="col-sm-2 col-md-4 col-form-label text-dark">Ten Khach Hang</label>
+                    <div class="col-sm-10 col-md-6">
+                        <span type="text" class="form-control m-1" id="name" value="" name="customername" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="container m-2 d-flex flex-wrap">
+                <div class="col-md-12 justify-content-center d-flex">
+                    <button type="button" id="check-btn" onclick="getCustomerName(document.getElementById('cmnd').value);showCanCloseBook(document.getElementById('cmnd').value)" class="btn-warning btn-block col-md-6">
+                        Check
+                    </button>
+                </div>
+            </div>
+            <div class="container">
+                <p id="alert"></p>
+                <p  id="amount-min-message"></p>
+            </div>
+          </section>
+          <section id="section-table">
+              <table class="table table-striped" id="table">
+                  <thead>
+                      <tr>
+                          <th scope="col">Ma so</th>
+                          <th scope="col">Ngay mo</th>
+                          <th scope="col">So du</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+              <div class="container d-flex flex-wrap">
+                  <label for="bookid-toadd" class="col-md-4">Chọn sổ</label>
+                  <select class="custom-select col-md-8 justify-content-center d-flex" name="bookid" id="booktoadd">
+
+                  </select>
+              </div>
+              <div class="container text-center">
+                <button type="button" onclick="createCloseNotice()" class="btn btn-primary btn-block m-2">Tao phieu rut</button>
+              </div>
+          </section>
+
+        <section class="container" style="background-color: gainsboro;">
+            <div class="container bg-secondary-2" id="request-confirm">
+                <h5 class="text-center text-white">Phieu yeu cau rut</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class=" row">
+                                <label for="bankbookid" class="col-sm-4 col-md-6 col-form-label text-dark">Ma so</label>
+                                <div class="col-sm-8 col-md-6">
+                                  <span type="text" readonly class="form-control" id="bankbookid" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class=" row">
+                                <label for="customername" class="col-sm-2 col-md-3 col-form-label text-dark">Khach hang</label>
+                                <div class="col-sm-10 col-md-9">
+                                  <span type="text" readonly class="form-control" id="customername" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class=" row">
+                                <label for="updatedate" class="col-sm-2 col-md-6 col-form-label text-dark">Ngay rut</label>
+                                <div class="col-sm-10 col-md-6">
+                                  <span type="date" readonly class="form-control" id="updatedate" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class=" row">
+                                <label for="amount" class="col-sm-2 col-md-6 col-form-label text-dark">So tien rut</label>
+                                <div class="col-sm-10 col-md-6">
+                                  <span  readonly class="form-control" id="amount" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container m-2 d-flex flex-wrap">
+                <div class="col-md-6 col-sm-6 d-flex">
+                  <button type="reset" class="btn-warning btn-block col-md-6"> Clear</button>
+                </div>
+                <div class="col-md-6 col-sm-6 justify-content-end d-flex">
+                    <button type="submit" class="btn-primary btn-block col-md-6">
+                        Post
+                    </button>
+                </div>
+            </div>
+        </section>
+        </form>
+      </div>
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <span class="text-muted">Dao Huynh Minh Thien</span>
+          </a>
+      </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>

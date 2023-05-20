@@ -10,7 +10,7 @@ module.exports = class Customer{
             return res.json(customer);
         } catch (error){
             res.status(500).json( { error: error});
-            throw new Error(`Khong tim thay khach hang. ${error}`);
+            //throw new Error(`${error}`);
         }
         
     }
