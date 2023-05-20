@@ -6,7 +6,7 @@ controller.showHomepage = async (req, res) =>{
 }
 
 controller.showPage = async (req,res, next) => {
-    const pages = ['deposit', 'login', 'request-create', 'withdraw','report'];
+    const pages = ['deposit', 'login', 'request-create', 'withdraw','update', 'withdraw'];
     if (pages.includes(req.params.page)){
         return  await res.render(req.params.page);
     }

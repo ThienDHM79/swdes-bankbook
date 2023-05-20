@@ -43,6 +43,7 @@ app.use( session({
 
 //routes
 app.use('/', require('./routes/indexRouter'));
+app.use('/report', require('./routes/ReportRouter'));
 app.use('/bankbook', require('./routes/BankbookRouter'));
 app.use('/update', require('./routes/TransactRouter') );
 app.use('/customer', require('./routes/CustomerRouter'));

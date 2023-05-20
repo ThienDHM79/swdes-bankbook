@@ -12,7 +12,6 @@ module.exports = class Report {
             const inputArr = yearMonth.split("-");
             const month = inputArr[1];
             const monthnum = parseInt(month);
-            console.log(`month: ${monthnum} is a ${typeof monthnum}`);
             return month;
         } catch(error){
             res.status(500).json( {error: error});
@@ -22,7 +21,6 @@ module.exports = class Report {
         try {
             let month = await Report.monthExtract(req, res);
             let bankbookMonth = await BankbookService.getBookOpenbyMonth(month);
-            console.log(bankbookMonth)
             let bankbookOnList = await BankbookService.getBookbyStatus(bankbookMonth,true);
             let OpenSum = ReportService.getSum(bankbookOnList);
             
