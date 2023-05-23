@@ -1,8 +1,8 @@
 {
   "use_env_variable": "POSTGRESQL_URL",
   "development": {
-    "username": "admin",
-    "password": "8hwRYrW1bDvs",
+    "username": "ThienDHM79",
+    "password": "FSDBzfHxh37M",
     "database": "neondb",
     "host": "ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech",
     "dialect": "postgres",
@@ -21,8 +21,8 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "admin",
-    "password": "8hwRYrW1bDvs",
+    "username": "ThienDHM79",
+    "password": "FSDBzfHxh37M",
     "database": "neondb",
     "host": "ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech",
     "dialect": "postgres",
