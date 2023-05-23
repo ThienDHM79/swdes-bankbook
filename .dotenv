@@ -1,0 +1,7 @@
+PORT=8000
+PGHOST=ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech
+PGDATABASE=neondb
+PGUSER=admin
+PGPASSWORD=8hwRYrW1bDvs
+ENDPOINT_ID=ep-gentle-cell-842274
+POSTGRESQL_URL = postgres://ThienDHM79:to81TMSLFeYx@ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech/neondb

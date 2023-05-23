@@ -1,10 +1,17 @@
 {
+  "use_env_variable": "POSTGRESQL_URL",
   "development": {
-    "username": "postgres",
-    "password": "admin",
-    "database": "bankbookDB",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "admin",
+    "password": "8hwRYrW1bDvs",
+    "database": "neondb",
+    "host": "ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "postgres",
@@ -14,10 +21,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "username",
-    "password": "password",
-    "database": "databasee",
-    "host": "host",
+    "username": "admin",
+    "password": "8hwRYrW1bDvs",
+    "database": "neondb",
+    "host": "ep-gentle-cell-842274.ap-southeast-1.aws.neon.tech",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
