@@ -16,25 +16,33 @@ module.exports = {
       "name": "bd-101",
       "savetype":"demand",
       "amount": 1000000,
-      "status": true
+      "status": true,
+      "customerId": 1,
+      "savetypeId": 1
     },
     {
       "name": "b3-102",
       "savetype":"3-month",
       "amount": 4000000,
-      "status": false
+      "status": false,
+      "customerId": 2,
+      "savetypeId": 2
     },
     {
       "name": "b6-103",
       "savetype":"6-month",
       "amount": 10000000,
-      "status": true
+      "status": true,
+      "customerId": 3,
+      "savetypeId": 3
     },
     {
       "name": "bd-104",
       "savetype":"demand",
       "amount": 400000,
-      "status": false
+      "status": false,
+      "customerId": 1,
+      "savetypeId": 1
     }
     
     ];
