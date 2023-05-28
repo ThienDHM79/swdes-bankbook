@@ -1,6 +1,7 @@
 'use strict';
 
 const { application } = require("express");
+const BankbookService = require("../../services/BankbookService");
 async function getCustomerName(inputcmnd){
     let res = await fetch('/customer?'+ new URLSearchParams( {
         cmnd: inputcmnd
@@ -182,7 +183,11 @@ async function createCloseNotice(){
 
     let date = new Date();
     document.getElementById('updatedate').innerText = convertDateString(date);
-    document.getElementById('amount').innerText = currencyFormat(parseInt(amount));
+
+    console.log(`book id: ${bookid}`);
+    let bankbook = await getBookbyId( bookid );
+    console.log(`bankbook ${bankbook.Bankbook}`);
+    document.getElementById('amount').innerText = currencyFormat(parseInt(bankbook.Bankbook.amount));
 
 }
 

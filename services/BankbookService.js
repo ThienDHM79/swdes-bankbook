@@ -83,7 +83,12 @@ module.exports = class BankbookService{
 
     static async getBookbyId(req, res){
         try {
-            let Bankbook = await models.Bankbook.findByPk(req.query.id);
+            let Bankbook = {};
+            if (!req.query.id){
+                Bankbook = await models.Bankbook.findByPk(req);
+            } else{
+                Bankbook = await models.Bankbook.findByPk(req.query.id);
+            }
             return Bankbook;
 
         } catch (error){
