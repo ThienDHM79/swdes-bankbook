@@ -40,14 +40,24 @@ app.use( session({
     }
 }));
 
-
+//check auth before go to route
+function checkAuth( req, res, next){
+    if (!req.session.user_id) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+}
 //routes
 app.use('/', require('./routes/indexRouter'));
-app.use('/report', require('./routes/ReportRouter'));
-app.use('/bankbook', require('./routes/BankbookRouter'));
-app.use('/update', require('./routes/TransactRouter') );
-app.use('/customer', require('./routes/CustomerRouter'));
-app.use('/transact', require('./routes/TransactRouter'));
+
+app.use('/login', require('./routes/indexRouter'));
+
+app.use('/report',checkAuth, require('./routes/ReportRouter'));
+app.use('/bankbook',checkAuth, require('./routes/BankbookRouter'));
+app.use('/update', checkAuth,require('./routes/TransactRouter') );
+app.use('/customer', checkAuth, require('./routes/CustomerRouter'));
+app.use('/transact', checkAuth, require('./routes/TransactRouter'));
 
 //create Table in DB
 app.get('/createTables', (req,res)=> {

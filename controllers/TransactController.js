@@ -4,6 +4,13 @@ const models = require('../models');
 const BankbookService = require("../services/BankbookService");
 const TransactService = require("../services/TransactService");
 module.exports = class Transact{
+    static async show (req, res, next){
+        const pages = ['withdraw', 'update'];
+        if (pages.includes( req.params.page)){
+            return await res.render(req.params.page);
+        }
+        next();
+    }
     static async createTransactAdd(req, res){
         try{
             let Transact = await TransactService.createTransactAdd(req,res);

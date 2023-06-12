@@ -10,6 +10,7 @@ const CustomerCtrl = require("../controllers/CustomerController");
 const CustomerService = require("../services/CustomerService");
 const ConfigService = require("../services/ConfigService");
 
+router.get('/:page', TransactCtrl.show);
 
 router.post("/add",
 body('cmnd').notEmpty().withMessage('CMND is required'),

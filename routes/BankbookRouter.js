@@ -34,7 +34,8 @@ body('amount').custom( value => ConfigService.checkMinInput(value)),
     },
     controller.showConfirm
 );
-
+//hien thi
+router.get('/request', controller.show);
 //post len db
 router.post("/post", controller.createBankbook);
 router.post("/list", controller.getBookbyCustomerid);

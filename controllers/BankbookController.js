@@ -6,6 +6,10 @@ const ConfigService = require('../services/ConfigService');
 const CustomerService = require('../services/CustomerService');
 
 module.exports = class Bankbook{
+    static async show (req, res, next){
+        return await res.render('request-create');
+        next();
+    }
     static async getAllBooks(req, res){
         try {
             let bankbooks = await BankbookService.getAllBooks();
