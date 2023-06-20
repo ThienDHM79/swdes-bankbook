@@ -7,5 +7,5 @@ const router = express.Router();
 //lay danh sach book
 router.get("/reportbook", BankbookCtrl.getAllBooks);
 router.get("/report-monthly", ReportCtrl.show);
-router.post("/report-monthly/search",ReportCtrl.getDaySum);
+router.post("/report-monthly",ReportCtrl.getDaySum);
 module.exports = router;

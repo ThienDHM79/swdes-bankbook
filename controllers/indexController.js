@@ -8,7 +8,7 @@ controller.checkAuth = (req, res) => {
     if (username == 'admin' && password == 'admin'){
         req.session.user_id = 'admin';
         res.locals.username = username;
-        res.redirect(req.originalUrl);
+        res.render('error',{message: "login succesful"});
     } else {
         res.send('invalid username or password');
     }

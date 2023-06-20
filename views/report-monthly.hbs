@@ -8,31 +8,33 @@
     <div class="container">
       <h4 class="text-center m-2 p-2">Báo cáo đóng mở sổ tháng</h4>
     </div>
-    <form action="./report-monthly/search" method="POST">
+    <form action="./report-monthly" method="POST">
       <div class="row m-1 d-flex justify-content-center">
+        <!-- not working for loaitietkiem
         <div class="input-group mb-2 col-md-6">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelectType">Loai tiet kiem</label>
             </div>
         <select class="custom-select" id="temp-booktype" name="booktype">
-            <option>Choose...</option>
-            <option value="demand">khong ky han</option>
-            <option value="3 thang">3 thang</option>
-            <option value="6 thang">6 thang</option>
+            {{#each saveType}}
+                <option value="{{savetype}}">{{savetype}}</option>
+            {{/each}}
+                <option value="all">All</option>
         </select>
         </div>
+        -->
         <div class="input-group col-md-4">
           <label for="daymonth"class="mb-2 mx-2 p-2">Tháng</label>
-          <input type="month" class="mb-2"name="month" id="monthly">
+          <input type="month" class="mb-2"name="month" id="monthly" required>
         </div>
         <div class="container">
           <button type="submit" class="btn btn-primary float-right m-2">Search</button>
         </div>
       </div>
     </form>
+    <p class="text-center">Tổng chênh lệch tháng : {{total}}</p>
     <div class="container d-flex justify-content-center">
-
-      <table id="html-data-table" class="table table-stripped w-auto">
+        <table id="html-data-table" class="table table-stripped w-auto">
         <thead>
           <tr>
             <th scope="col">STT</th>
@@ -43,15 +45,15 @@
           </tr>
         </thead>
         <tbody>
-          {{#with DayLine}}
+          {{#each DayLine}}
           <tr class="book-item">
-              <td>1</td>
-              <td>{{month}}</td>
+              <td>{{no}}</td>
+              <td>{{date}}</td>
               <td>{{OpenSum}}</td>
               <td>{{ClosedSum}}</td>
               <td>{{Delta}}</td>
           </tr>
-          {{/with}}
+          {{/each}}
         </tbody>
       </table>
     </div>

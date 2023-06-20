@@ -7,8 +7,7 @@ const port = process.env.PORT || 8000;
 
 //handle-bar
 const expressHandlebars = require('express-handlebars');
-//helper
-const {getDate} = require('./controllers/helper');
+
 //session
 const session = require('express-session');
 //cau hinh public static folder
