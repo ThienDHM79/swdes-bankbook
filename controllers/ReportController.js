@@ -12,7 +12,7 @@ module.exports = class Report {
             const inputArr = yearMonth.split("-");
             const month = inputArr[1];
             const monthnum = parseInt(month);
-            return month;
+            return monthnum;
         } catch(error){
             res.status(500).json( {error: error});
         }

@@ -56,8 +56,10 @@ module.exports = class BankbookService{
     static async getBookOpenbyMonth(inputMonth){
         try{
             const timezoneOffset = '+07:00';
+            //test xoa timezone -> correct do datatype timestamp co timezone
+            //`EXTRACT(MONTH FROM "openDate" AT TIME ZONE '${timezoneOffset}') = ${inputMonth}`
             let bookList = await models.Bankbook.findAll({
-                where: Sequelize.literal(`EXTRACT(MONTH FROM "openDate" AT TIME ZONE '${timezoneOffset}') = ${inputMonth}`)
+                where: Sequelize.literal(`EXTRACT(MONTH FROM "openDate") = ${inputMonth}`)
             });
             return bookList;
         } catch (error){
